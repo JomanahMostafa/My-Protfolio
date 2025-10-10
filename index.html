@@ -108,7 +108,7 @@
                 </div>
 
                 <div class="hero-stats">
-                    
+
                     <div class="stat-item">
                         <h3 class="stat-number" data-count="2">0</h3>
                         <p class="stat-text" data-key="yearsExperience">سنوات خبرة</p>
@@ -489,29 +489,25 @@ export default Portfolio;
                     </div>
                 </div>
 
-                <form class="contact-form">
+                <form id="contactForm" onsubmit="saveMessage(event)">
                     <div class="form-group">
-                        <input type="text" placeholder=" " required>
-                        <label data-key="namePlaceholder">الاسم الكامل</label>
-                        <span class="focus-border"></span>
+                        <input type="text" id="contactFirstName" required placeholder="الاسم الأول">
                     </div>
 
                     <div class="form-group">
-                        <input type="email" placeholder=" " required>
-                        <label data-key="emailPlaceholder">البريد الإلكتروني</label>
-                        <span class="focus-border"></span>
+                        <input type="text" id="contactLastName" required placeholder="اسم العائلة">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" placeholder=" " required>
-                        <label data-key="subjectPlaceholder">الموضوع</label>
-                        <span class="focus-border"></span>
+                        <input type="email" id="contactEmail" required placeholder="البريد الإلكتروني">
                     </div>
 
                     <div class="form-group">
-                        <textarea placeholder=" " rows="5" required></textarea>
-                        <label data-key="messagePlaceholder">الرسالة</label>
-                        <span class="focus-border"></span>
+                        <input type="text" id="contactSubject" required placeholder="الموضوع">
+                    </div>
+
+                    <div class="form-group">
+                        <textarea id="contactMessage" required placeholder="الرسالة" rows="5"></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary submit-btn">
