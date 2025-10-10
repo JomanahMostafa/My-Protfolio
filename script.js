@@ -585,43 +585,43 @@ if (heroSection) {
 function loadPortfolioProjects() {
     const projects = localStorage.getItem('portfolio-projects');
     const projectsGrid = document.querySelector('.projects-grid');
-    
+
     // إذا لم تكن هناك مشاريع محفوظة، اترك المحتوى الأصلي
     if (!projects || !projectsGrid) {
         return;
     }
-    
+
     const projectsData = JSON.parse(projects);
     const currentLang = document.body.getAttribute('data-lang') || 'ar';
-    
+
     // فقط إذا كانت هناك مشاريع محفوظة، استبدل المحتوى
     if (projectsData.length > 0) {
         projectsGrid.innerHTML = projectsData.map(project => {
-            // خلفية بسيطة
-            const projectBg = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-            
-            // أيقونة بسيطة
-            const projectIcon = '<i class="fas fa-code" style="font-size: 3rem; color: white;"></i>';
-            
-            // إنشاء أزرار الروابط المتاحة فقط
-            let linksHtml = '';
-            if (project.links.youtube) {
-                linksHtml += `<a href="${project.links.youtube}" class="project-link" target="_blank" style="background: #ff0000; color: white;" title="YouTube Video">
+                    // خلفية بسيطة
+                    const projectBg = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+
+                    // أيقونة بسيطة
+                    const projectIcon = '<i class="fas fa-code" style="font-size: 3rem; color: white;"></i>';
+
+                    // إنشاء أزرار الروابط المتاحة فقط
+                    let linksHtml = '';
+                    if (project.links.youtube) {
+                        linksHtml += `<a href="${project.links.youtube}" class="project-link" target="_blank" style="background: #ff0000; color: white;" title="YouTube Video">
                     <i class="fab fa-youtube"></i>
                 </a>`;
-            }
-            if (project.links.github) {
-                linksHtml += `<a href="${project.links.github}" class="project-link" target="_blank" style="background: #333; color: white;" title="GitHub Repository">
+                    }
+                    if (project.links.github) {
+                        linksHtml += `<a href="${project.links.github}" class="project-link" target="_blank" style="background: #333; color: white;" title="GitHub Repository">
                     <i class="fab fa-github"></i>
                 </a>`;
-            }
-            if (project.links.live) {
-                linksHtml += `<a href="${project.links.live}" class="project-link" target="_blank" style="background: #007bff; color: white;" title="Live Demo">
+                    }
+                    if (project.links.live) {
+                        linksHtml += `<a href="${project.links.live}" class="project-link" target="_blank" style="background: #007bff; color: white;" title="Live Demo">
                     <i class="fas fa-external-link-alt"></i>
                 </a>`;
-            }
-            
-            return `
+                    }
+
+                    return `
                 <div class="project-card">
                     <div class="project-image">
                         <div class="project-thumbnail" style="width: 100%; height: 200px; background: ${projectBg}; display: flex; align-items: center; justify-content: center; position: relative;">
@@ -718,3 +718,89 @@ setLanguage = function(lang) {
     originalSetLanguage(lang);
     setTimeout(loadPortfolioProjects, 100);
 };
+
+function saveMessage(event) {
+    event.preventDefault();
+
+    const firstName = document.getElementById('contactFirstName').value;
+    const lastName = document.getElementById('contactLastName').value;
+    const email = document.getElementById('contactEmail').value;
+    const subject = document.getElementById('contactSubject').value;
+    const message = document.getElementById('contactMessage').value;
+
+    if (!firstName || !lastName || !email || !subject || !message) {
+        showNotification('يرجى ملء جميع الحقول!', 'error');
+        return;
+    }
+
+    const msg = {
+        id: Date.now(),
+        firstName,
+        lastName,
+        email,
+        subject,
+        message,
+        date: new Date().toISOString()
+    };
+
+    const messages = getMessages();
+    messages.push(msg);
+    localStorage.setItem('portfolio-messages', JSON.stringify(messages));
+
+    showNotification('تم إرسال الرسالة بنجاح!', 'success');
+
+    document.getElementById('contactForm').reset();
+    renderDashboardMessages();
+    switchTab('messages');
+}
+
+function switchTab(tabName) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+    document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+    document.getElementById(`${tabName}-tab`).classList.add('active');
+
+    if (tabName === 'manage') {
+        loadProjects();
+    }
+    if (tabName === 'messages') {
+        renderDashboardMessages();
+    }
+}
+
+function getMessages() {
+    const stored = localStorage.getItem('portfolio-messages');
+    return stored ? JSON.parse(stored) : [];
+}
+
+function renderDashboardMessages() {
+    const messages = getMessages();
+    const container = document.getElementById('dashboardMessages');
+    if (messages.length === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 3rem; color: #666;">
+                <i class="fas fa-envelope-open-text" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                <p>لا توجد رسائل حالياً.</p>
+            </div>
+        `;
+        return;
+    }
+    container.innerHTML = messages.reverse().map(msg => `
+        <div style="background:#f9fafb;border-radius:12px;box-shadow:0 4px 16px rgba(102,126,234,0.08);padding:1.5rem;margin-bottom:1rem;border:2px solid #e5e7eb;">
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:0.7rem;">
+                <i class="fas fa-user" style="color:#667eea;font-size:1.5rem;"></i>
+                <strong>${msg.firstName} ${msg.lastName}</strong>
+                <span style="color:#999;font-size:0.9rem;margin-right:auto;">${new Date(msg.date).toLocaleString()}</span>
+            </div>
+            <div style="margin-bottom:0.5rem;">
+                <span style="background:#e0e7ff;color:#5b21b6;padding:2px 8px;border-radius:8px;font-weight:600;">
+                    <i class="fas fa-tag"></i> ${msg.subject}
+                </span>
+            </div>
+            <div style="color:#555;font-size:0.95rem;margin-bottom:0.5rem;">
+                <i class="fas fa-comment-dots"></i> ${msg.message}
+            </div>
+        </div>
+    `).join('');
+}
