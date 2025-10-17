@@ -1,585 +1,836 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+// Compat mode: use global firebase
+// ===== TRANSLATIONS =====
+const translations = {
+    ar: {
+        // Navigation
+        home: "الرئيسية",
+        about: "عنّي",
+        skills: "المهارات",
+        projects: "المشاريع",
+        contact: "اتصل بي",
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بورتفوليو مهندسه Front-end Web | Developer</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
+        // Hero Section
+        welcome: "مرحباً بك في بورتفوليو",
+        iam: "أنا",
+        name: " جمانه مصطفى",
+        title: "مهندسة Front-end Web محترفه",
+        heroDesc: " أحب تحويل الأفكار إلى واقع ملموس, مع التركيز على تجربة المستخدم المتميزة والأداء العالي.",
+        viewProjects: "عرض المشاريع",
+        contactMe: "تواصل معي",
+        projectsCompleted: "مشروع مكتمل",
+        yearsExperience: "سنوات خبرة",
 
-<body class="light-mode" data-lang="ar">
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="loader">
-            <div class="loader-circle"></div>
-            <div class="loader-text">جاري التحميل...</div>
-        </div>
-    </div>
 
-    <!-- Floating Elements -->
-    <div class="floating-elements">
-        <div class="float-circle circle-1"></div>
-        <div class="float-circle circle-2"></div>
-        <div class="float-circle circle-3"></div>
-        <div class="float-square square-1"></div>
-        <div class="float-square square-2"></div>
-    </div>
+        // About Section
+        aboutTitle: "عنّي",
 
-    <!-- شريط التنقل -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <div class="logo-icon">
-                    <i class="fas fa-code"></i>
-                </div>
-                <h2 class="logo-text">فلتر ديف</h2>
-            </div>
+        aboutBioTitle: "مرحباً، أنا جمانه",
+        aboutBio1: "مهندس Front-end Web محترف مع أكثر من 2 سنوات من الخبرة في تطوير المواقع والتطبيقات الويب. لدي شغف كبير بإنشاء مواقع جميلة وعملية تلبي احتياجات المستخدمين.",
+        aboutBio2: "متخصص في تطوير المواقع والتطبيقات الويب باستخدام React, Next.js, HTML, CSS و JavaScript، مع التركيز على واجهات المستخدم التفاعلية وتجربة المستخدم المتميزة والأداء العالي.",
+        yearsExp: "سنوات خبرة",
+        feature1Title: "مواقع سريعة",
+        feature1Desc: "أداء عالي وتجربة مستخدم سلسة",
+        feature2Title: "تصميم حديث",
+        feature2Desc: "واجهات مستخدم جذابة وعصرية",
+        feature3Title: "كود نظيف",
+        feature3Desc: "هيكلة برمجية محترفة وقابلة للصيانة",
 
-            <div class="nav-menu">
-                <a href="#home" class="nav-link" data-key="home">الرئيسية</a>
-                <a href="#about" class="nav-link" data-key="about">عنّي</a>
-                <a href="#skills" class="nav-link" data-key="skills">المهارات</a>
-                <a href="#projects" class="nav-link" data-key="projects">المشاريع</a>
-                <a href="#contact" class="nav-link" data-key="contact">اتصل بي</a>
+        // Skills Section
+        skillsTitle: "المهارات",
+        skillsSubtitle: "المهارات والتقنيات التي أتقنها",
+        techSkills: "المهارات التقنية",
+        uiSkills: "واجهة المستخدم",
 
-                <div class="nav-controls">
-                    <div class="toggle-container lang-toggle">
-                        <button class="toggle-btn active" data-lang="ar">
-                            <i class="fas fa-language"></i>
-                            <span>العربية</span>
-                        </button>
-                        <button class="toggle-btn" data-lang="en">
-                            <i class="fas fa-language"></i>
-                            <span>English</span>
-                        </button>
-                    </div>
+        // Projects Section
+        projectsTitle: "المشاريع",
+        projectsSubtitle: "أحدث أعمالي وإنجازاتي",
+        project1Title: "موقع متجر إلكتروني",
+        project1Desc: "موقع متجر شامل للتجارة الإلكترونية مع دفع آمن وإدارة طلبات.",
+        project2Title: "موقع طبي",
+        project2Desc: "موقع لحجز المواعيد الطبية وإدارة السجلات الصحية.",
+        project3Title: "موقع توصيل طعام",
+        project3Desc: "موقع لتوصيل الطعام مع نظام تتبع حي للطلبات.",
 
-                    <div class="toggle-container theme-toggle">
-                        <button class="toggle-btn active" data-theme="light">
-                            <i class="fas fa-sun"></i>
-                        </button>
-                        <button class="toggle-btn" data-theme="dark">
-                            <i class="fas fa-moon"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+        // Contact Section
+        contactTitle: "اتصل بي",
+        contactSubtitle: "لنتحدث عن مشروعك القادم",
+        contactInfoTitle: "لنتحدث عن مشروعك",
+        contactInfoDesc: "أنا متاح دائمًا لمناقشة أفكار مشاريعك ومساعدتك في تحقيقها. لا تتردد في التواصل معي عبر أي من الوسائل التالية.",
+        emailTitle: "البريد الإلكتروني",
+        phoneTitle: "الهاتف",
+        locationTitle: "الموقع",
+        location: "القاهرة، مصر",
+        namePlaceholder: "الاسم الكامل",
+        emailPlaceholder: "البريد الإلكتروني",
+        subjectPlaceholder: "الموضوع",
+        messagePlaceholder: "الرسالة",
+        sendMessage: "إرسال الرسالة",
 
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+        // Footer
+        footerText: "مهندس Front-end Web محترف متخصص في تطوير المواقع والتطبيقات الويب المبتكرة والعصرية.",
+        allRights: "جميع الحقوق محفوظة"
+    },
+    en: {
+        // Navigation
+        home: "Home",
+        about: "About",
+        skills: "Skills",
+        projects: "Projects",
+        contact: "Contact",
 
-    <!-- القسم الرئيسي -->
-    <section id="home" class="hero">
-        <div class="hero-bg"></div>
-        <div class="container">
-            <div class="profile-image-container">
-                <div class="profile-image">
-                    <img src="images/Smallprofile.jpeg" alt="Front-end Developer" />
-                </div>
-            </div>
-            <div class="hero-container">
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <span class="badge-text" data-key="welcome">مرحباً بك في بورتفولي</span>
-                    </div>
-                    <h1 class="hero-title">
-                        <span data-key="iam">أنا</span>
-                        <span class="gradient-text" data-key="name">جمانه مصطفى</span>
-                    </h1>
-                    <h2 class="hero-subtitle" data-key="title">مهندسه Front-end Web محترفه</h2>
-                    <p class="hero-description" data-key="heroDesc">
-                        أحب تحويل الأفكار إلى واقع ملموس, مع التركيز على تجربة المستخدم المتميزة والأداء العالي. </p>
-                    <a href="#projects" class="btn btn-primary" data-key="viewProjects">
-                        <span>عرض المشاريع</span>
-                        <i class="fas fa-arrow-left"></i>
-                    </a>
-                    <a href="#contact" class="btn btn-secondary" data-key="contactMe">
-                        <span>تواصل معي</span>
-                        <i class="fas fa-paper-plane"></i>
-                    </a>
-                </div>
+        // Hero Section
+        welcome: "Welcome to Portfolio",
+        iam: "I'm",
+        name: "Jomanah Mostafa",
+        title: "Professional Front-end Engineer",
+        heroDesc: "I develop innovative websites, focusing on exceptional user experience and high performance. I love turning ideas into tangible reality.",
+        viewProjects: "View Projects",
+        contactMe: "Contact Me",
+        projectsCompleted: "Projects Completed",
+        yearsExperience: "Years Experience",
 
-                <div class="hero-stats">
 
-                    <div class="stat-item">
-                        <h3 class="stat-number" data-count="2">0</h3>
-                        <p class="stat-text" data-key="yearsExperience">سنوات خبرة</p>
-                    </div>
+        // About Section
+        aboutTitle: "About Me",
+        aboutSubtitle: "Learn more about my journey and expertise",
+        aboutBioTitle: "Hello, I'm Jomanah",
+        aboutBio1: "Professional Front-end engineer with over 2 years of experience in web applications development. I have a great passion for creating beautiful and practical applications that meet user needs.",
+        aboutBio2: "Specialized in developing websites using html , css , javascrpt , react(next.js), with a focus on interactive user interfaces, exceptional user experience, and high performance.",
+        yearsExp: "Years Experience",
+        feature1Title: "Fast websites",
+        feature1Desc: "High performance and smooth user experience",
+        feature2Title: "Modern Design",
+        feature2Desc: "Attractive and contemporary user interfaces",
+        feature3Title: "Clean Code",
+        feature3Desc: "Professional and maintainable software structure",
 
-                </div>
-            </div>
+        // Skills Section
+        skillsTitle: "Skills",
+        skillsSubtitle: "Technologies and skills I master",
+        techSkills: "Technical Skills",
+        uiSkills: "User Interface",
 
-            <div class="hero-image">
-                <div class="image-container">
-                    <div class="main-image">
-                        <div class="code-window">
-                            <div class="window-header">
-                                <div class="window-dots">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <span class="window-title">App.js</span>
-                            </div>
-                            <div class="code-content">
-                                <pre><code class="javascript-code">
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+        // Projects Section
+        projectsTitle: "Projects",
+        projectsSubtitle: "My latest works and achievements",
+        project1Title: "E-commerce App",
+        project1Desc: "Comprehensive e-commerce store application with secure payment and order management.",
+        project2Title: "Medical App",
+        project2Desc: "Application for booking medical appointments and managing health records.",
+        project3Title: "Food Delivery App",
+        project3Desc: "Food delivery application with live order tracking system.",
 
-function Portfolio() {
-    return (
-        <Router>
-            <div className="app">
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/projects" element={<Projects />} />
-                </Routes>
-            </div>
-        </Router>
-    );
+        // Contact Section
+        contactTitle: "Contact Me",
+        contactSubtitle: "Let's talk about your next project",
+        contactInfoTitle: "Let's Talk About Your Project",
+        contactInfoDesc: "I'm always available to discuss your project ideas and help you achieve them. Feel free to contact me through any of the following means.",
+        emailTitle: "Email",
+        phoneTitle: "Phone",
+        locationTitle: "Location",
+        location: "Cairo, Egypt",
+        namePlaceholder: "Full Name",
+        emailPlaceholder: "Email Address",
+        subjectPlaceholder: "Subject",
+        messagePlaceholder: "Message",
+        sendMessage: "Send Message",
+
+        // Footer
+        footerText: "Professional Front-end Web engineer specialized in developing innovative and modern websites and web applications.",
+        allRights: "All rights reserved"
+    }
+};
+
+// ===== DOM ELEMENTS =====
+const body = document.body;
+const preloader = document.querySelector('.preloader');
+const navbar = document.querySelector('.navbar');
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+const langButtons = document.querySelectorAll('.toggle-btn[data-lang]');
+const themeButtons = document.querySelectorAll('.toggle-btn[data-theme]');
+const scrollToTopBtn = document.querySelector('.scroll-to-top');
+
+// ===== INITIALIZATION =====
+document.addEventListener('DOMContentLoaded', function() {
+    initializeApp();
+});
+
+function initializeApp() {
+    // Initialize preloader
+    initPreloader();
+
+    // Initialize navigation
+    initNavigation();
+
+    // Initialize language system
+    initLanguageSystem();
+
+    // Initialize theme system
+    initThemeSystem();
+
+    // Initialize animations
+    initAnimations();
+
+    // Initialize scroll effects
+    initScrollEffects();
+
+    // Initialize contact form
+    initContactForm();
 }
 
-export default Portfolio;
-                                    </code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="floating-card card-1">
-                        <i class="fab fa-react"></i>
-                        <span>React</span>
-                    </div>
-                    <div class="floating-card card-2">
-                        <i class="fab fa-js-square"></i>
-                        <span>JavaScript</span>
-                    </div>
-                    <div class="floating-card card-3">
-                        <i class="fas fa-rocket"></i>
-                        <span>Fast</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section>
+// ===== PRELOADER =====
+function initPreloader() {
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            preloader.classList.add('hidden');
 
-    <!-- قسم عني -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-key="aboutTitle">عنّي</h2>
-                <p class="section-subtitle" data-key="aboutSubtitle">تعرف على المزيد عن رحلتي وخبراتي</p>
-            </div>
+            // Remove preloader from DOM after animation
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        }, 1500);
+    });
+}
 
-            <div class="about-content">
-                <div class="about-image">
-                    <div class="image-frame">
-                        <div class="profile-image">
-                            <img src="images/bigprofile.jpeg" alt="About me photo" loading="lazy">
-                        </div>
-                        <div class="image-overlay">
+// ===== NAVIGATION =====
+function initNavigation() {
+    // Hamburger menu toggle
+    hamburger.addEventListener('click', toggleMobileMenu);
 
-                        </div>
-                    </div>
-                </div>
+    // Close mobile menu when clicking on links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+    });
 
-                <div class="about-text">
-                    <div class="about-bio">
-                        <h3 data-key="aboutBioTitle">مرحباً، انا جمانه</h3>
-                        <p data-key="aboutBio1">
-                            مهندس Front-end Web محترف مع أكثر من 2 سنوات من الخبرة في تطوير المواقع والتطبيقات الويب. لدي شغف كبير بإنشاء مواقع جميلة وعملية تلبي احتياجات المستخدمين.
-                        </p>
-                        <p data-key="aboutBio2">
-                            متخصص في تطوير المواقع والتطبيقات الويب باستخدام React, Next.js, HTML, CSS و JavaScript، مع التركيز على واجهات المستخدم التفاعلية وتجربة المستخدم المتميزة والأداء العالي.
-                        </p>
-                        <div style="margin-top: 1rem;">
-                            <a id="cvDownloadBtn" href="#" target="_blank" rel="noopener" class="btn btn-primary" style="display:none;">
-                                <span>Download CV</span>
-                                <i class="fas fa-file-download"></i>
-                            </a>
-                        </div>
-                    </div>
+    // Navbar background on scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            navbar.style.boxShadow = 'var(--shadow-lg)';
 
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <div class="feature-content">
-                                <h4 data-key="feature1Title">مواقع سريعة</h4>
-                                <p data-key="feature1Desc">أداء عالي وتجربة مستخدم سلسة</p>
-                            </div>
-                        </div>
+            if (body.classList.contains('dark-mode')) {
+                navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+            }
+        } else {
+            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.boxShadow = 'var(--shadow-sm)';
 
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-paint-brush"></i>
-                            </div>
-                            <div class="feature-content">
-                                <h4 data-key="feature2Title">تصميم حديث</h4>
-                                <p data-key="feature2Desc">واجهات مستخدم جذابة وعصرية</p>
-                            </div>
-                        </div>
-
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <div class="feature-content">
-                                <h4 data-key="feature3Title">كود نظيف</h4>
-                                <p data-key="feature3Desc">هيكلة برمجية محترفة وقابلة للصيانة</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم المهارات -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-key="skillsTitle">المهارات</h2>
-                <p class="section-subtitle" data-key="skillsSubtitle">المهارات والتقنيات التي أتقنها</p>
-            </div>
-
-            <div class="skills-container">
-                <div class="skills-category">
-                    <h3 class="category-title" data-key="techSkills">المهارات التقنية</h3>
-                    <div class="skills-grid">
-                        <div class="skill-item" data-skill="95">
-                            <div class="skill-header">
-                                <div class="skill-info">
-                                    <span class="skill-name">React</span>
-                                    <span class="skill-percent">95%</span>
-                                </div>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item" data-skill="100">
-                            <div class="skill-header">
-                                <div class="skill-info">
-                                    <span class="skill-name">Html</span>
-                                    <span class="skill-percent">100%</span>
-                                </div>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item" data-skill="97">
-                            <div class="skill-header">
-                                <div class="skill-info">
-                                    <span class="skill-name">Css</span>
-                                    <span class="skill-percent">97%</span>
-                                </div>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skills-category">
-                    <h3 class="category-title" data-key="uiSkills">واجهة المستخدم</h3>
-                    <div class="skills-grid">
-                        <div class="skill-item" data-skill="90">
-                            <div class="skill-header">
-                                <div class="skill-info">
-                                    <span class="skill-name">JavaScript</span>
-                                    <span class="skill-percent">90%</span>
-                                </div>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item" data-skill="90">
-                            <div class="skill-header">
-                                <div class="skill-info">
-                                    <span class="skill-name">Next.js</span>
-                                    <span class="skill-percent">90%</span>
-                                </div>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item" data-skill="92">
-                            <div class="skill-header">
-                                <div class="skill-info">
-                                    <span class="skill-name">Animations</span>
-                                    <span class="skill-percent">92%</span>
-                                </div>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم المشاريع -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-key="projectsTitle">المشاريع</h2>
-                <p class="section-subtitle" data-key="projectsSubtitle">أحدث أعمالي وإنجازاتي</p>
-                <button onclick="loadPortfolioProjects()" style="background: #7c3aed; color: white; padding: 0.5rem 1rem; border: none; border-radius: 8px; cursor: pointer; margin-top: 1rem;">
-                    <i class="fas fa-sync-alt"></i> تحديث المشاريع
-                </button>
-            </div>
-
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="#" class="project-link">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="project-badge">Next.js</div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title" data-key="project1Title">موقع متجر إلكتروني</h3>
-                        <p class="project-description" data-key="project1Desc">
-                            موقع متجر شامل للتجارة الإلكترونية مع دفع آمن وإدارة طلبات.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Next.js</span>
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Stripe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="#" class="project-link">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="project-badge">React</div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title" data-key="project2Title">موقع طبي</h3>
-                        <p class="project-description" data-key="project2Desc">
-                            موقع لحجز المواعيد الطبية وإدارة السجلات الصحية.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Next.js</span>
-                            <span class="tech-tag">MongoDB</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="#" class="project-link">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="project-badge">JavaScript</div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title" data-key="project3Title">موقع توصيل طعام</h3>
-                        <p class="project-description" data-key="project3Desc">
-                            موقع لتوصيل الطعام مع نظام تتبع حي للطلبات.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Google Maps</span>
-                            <span class="tech-tag">Firebase</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم اتصل بي -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-key="contactTitle">اتصل بي</h2>
-                <p class="section-subtitle" data-key="contactSubtitle">لنتحدث عن مشروعك القادم</p>
-            </div>
-
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3 data-key="contactInfoTitle">لنتحدث عن مشروعك</h3>
-                    <p data-key="contactInfoDesc">
-                        أنا متاح دائمًا لمناقشة أفكار مشاريعك ومساعدتك في تحقيقها. لا تتردد في التواصل معي عبر أي من الوسائل التالية.
-                    </p>
-
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-content">
-                                <h4 data-key="emailTitle">البريد الإلكتروني</h4>
-                                <span>jomanahmosyafa@gmail.com</span>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-content">
-                                <h4 data-key="phoneTitle">الهاتف</h4>
-                                <span>01224058523</span>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="contact-content">
-                                <h4 data-key="locationTitle">الموقع</h4>
-                                <span data-key="location">مصر</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="social-links">
-                        <a href="http://github.com/JomanahMostafa" class="social-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/jomanah-mostafa-9b8275340?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-link">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-
-                        <a href="https://www.facebook.com/share/1FpwqP48T8/" class="social-link">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <form id="contactForm" onsubmit="saveMessage(event)">
-                    <div class="form-group">
-                        <input type="text" id="contactFirstName" required placeholder="الاسم الأول">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" id="contactLastName" required placeholder="اسم العائلة">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="email" id="contactEmail" required placeholder="البريد الإلكتروني">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" id="contactSubject" required placeholder="الموضوع">
-                    </div>
-
-                    <div class="form-group">
-                        <textarea id="contactMessage" required placeholder="الرسالة" rows="5"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary submit-btn">
-                        <span data-key="sendMessage">إرسال الرسالة</span>
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- التذييل -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h2 class="logo-text">فلتر ديف</h2>
-                </div>
-
-                <p class="footer-text" data-key="footerText">
-                    مهندس Front-end Web محترف متخصص في تطوير المواقع والتطبيقات الويب المبتكرة والعصرية.
-                </p>
-
-                <div class="footer-links">
-                    <a href="#home" data-key="home">الرئيسية</a>
-                    <a href="#about" data-key="about">عنّي</a>
-                    <a href="#skills" data-key="skills">المهارات</a>
-                    <a href="#projects" data-key="projects">المشاريع</a>
-                    <a href="#contact" data-key="contact">اتصل بي</a>
-                </div>
-
-                <div class="footer-bottom">
-                    <p>&copy; 2024 <span data-key="name">جمانه مصطفى</span>. <span data-key="allRights">جميع الحقوق محفوظة</span>.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- زر العودة للأعلى -->
-    <button class="scroll-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-    <script>
-        // Initialize Firebase directly
-        const firebaseConfig = {
-            apiKey: "AIzaSyApu6eRjaVKFqn8Y4-BmnVe3gmG9gz9qbM",
-            authDomain: "my-protfolio-2913b.firebaseapp.com",
-            projectId: "my-protfolio-2913b",
-            storageBucket: "my-protfolio-2913b.appspot.com",
-            messagingSenderId: "141810677523",
-            appId: "1:141810677523:web:532e7bfb2fb882536b8ce6",
-            measurementId: "G-XT8PFG78SK"
-        };
-        
-        // Initialize Firebase
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
+            if (body.classList.contains('dark-mode')) {
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+            }
         }
-    </script>
-    <script src="script.js" defer></script>
-</body>
+    });
+}
 
-</html>
+function toggleMobileMenu() {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+}
+
+// ===== LANGUAGE SYSTEM =====
+function initLanguageSystem() {
+    const savedLang = localStorage.getItem('portfolio-lang') || 'ar';
+    setLanguage(savedLang);
+
+    langButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const lang = this.getAttribute('data-lang');
+            setLanguage(lang);
+        });
+    });
+}
+
+function setLanguage(lang) {
+    // Update HTML direction and lang attribute
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+    body.setAttribute('data-lang', lang);
+
+    // Update active button state
+    langButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+
+    // Update all translatable elements
+    updateTextContent(lang);
+
+    // Save preference
+    localStorage.setItem('portfolio-lang', lang);
+}
+
+function updateTextContent(lang) {
+    const translation = translations[lang];
+
+    // Update elements with data-key attribute
+    document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (translation[key]) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                element.setAttribute('placeholder', translation[key]);
+            } else {
+                element.innerHTML = translation[key];
+            }
+        }
+    });
+
+    // Update hero title with gradient text
+    const heroTitle = document.querySelector('.hero-title .gradient-text');
+    if (heroTitle && translation.name) {
+        heroTitle.textContent = translation.name;
+    }
+}
+
+// ===== THEME SYSTEM =====
+function initThemeSystem() {
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+    setTheme(savedTheme);
+
+    themeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const theme = this.getAttribute('data-theme');
+            setTheme(theme);
+        });
+    });
+}
+
+function setTheme(theme) {
+    // Update body class
+    body.classList.remove('light-mode', 'dark-mode');
+    body.classList.add(`${theme}-mode`);
+
+    // Update active button state
+    themeButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-theme') === theme);
+    });
+
+    // Update navbar background
+    if (window.scrollY > 100) {
+        navbar.style.background = theme === 'light' ?
+            'rgba(255, 255, 255, 0.98)' :
+            'rgba(15, 23, 42, 0.98)';
+    }
+
+    // Save preference
+    localStorage.setItem('portfolio-theme', theme);
+}
+
+// ===== ANIMATIONS =====
+function initAnimations() {
+    // Initialize skill bars
+    initSkillBars();
+
+    // Initialize counter animation
+    initCounters();
+
+    // Initialize scroll animations
+    initScrollAnimations();
+}
+
+function initSkillBars() {
+    const skillItems = document.querySelectorAll('.skill-item');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const skillItem = entry.target;
+                const skillLevel = skillItem.getAttribute('data-skill');
+                const skillProgress = skillItem.querySelector('.skill-progress');
+
+                setTimeout(() => {
+                    skillProgress.style.width = `${skillLevel}%`;
+                }, 300);
+
+                observer.unobserve(skillItem);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    skillItems.forEach(item => observer.observe(item));
+}
+
+function initCounters() {
+    const counters = document.querySelectorAll('[data-count]');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000; // 2 seconds
+                const step = target / (duration / 16); // 60fps
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current);
+                }, 16);
+
+                observer.unobserve(counter);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
+}
+
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.hero-content, .hero-image, .about-image, .about-text, .skills-category, .project-card, .contact-info, .contact-form');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    animatedElements.forEach(el => {
+        el.style.animationPlayState = 'paused';
+        observer.observe(el);
+    });
+}
+
+// ===== SCROLL EFFECTS =====
+function initScrollEffects() {
+    // Scroll to top button
+    window.addEventListener('scroll', toggleScrollToTop);
+
+    scrollToTopBtn.addEventListener('click', scrollToTop);
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 80;
+
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+function toggleScrollToTop() {
+    if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add('visible');
+    } else {
+        scrollToTopBtn.classList.remove('visible');
+    }
+}
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// ===== CONTACT FORM =====
+function initContactForm() {
+    const contactForm = document.querySelector('.contact-form');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(this);
+            const name = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const subject = this.querySelectorAll('input[type="text"]')[1].value;
+            const message = this.querySelector('textarea').value;
+
+            // Simple validation
+            if (!name || !email || !subject || !message) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+
+            // Simulate form submission
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = `
+                <span>${body.getAttribute('data-lang') === 'ar' ? 'جاري الإرسال...' : 'Sending...'}</span>
+                <i class="fas fa-spinner fa-spin"></i>
+            `;
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                showNotification(
+                    body.getAttribute('data-lang') === 'ar' ?
+                    'تم إرسال رسالتك بنجاح!' :
+                    'Your message has been sent successfully!',
+                    'success'
+                );
+
+                // Reset form
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+    }
+}
+
+function showNotification(message, type) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+
+    // Add styles
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: ${type === 'success' ? 'var(--success)' : 'var(--error)'};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-xl);
+        z-index: 10000;
+        transform: translateX(400px);
+        transition: transform 0.3s ease;
+        max-width: 400px;
+    `;
+
+    document.body.appendChild(notification);
+
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+
+    // Remove after 5 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 5000);
+}
+
+// ===== ADDITIONAL ENHANCEMENTS =====
+// Parallax effect for floating elements
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const parallaxElements = document.querySelectorAll('.float-circle, .float-square');
+
+    parallaxElements.forEach(element => {
+        const speed = element.classList.contains('float-circle') ? 0.5 : 0.3;
+        element.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+});
+
+// Typing effect for hero title (optional enhancement)
+function initTypingEffect() {
+    const heroTitle = document.querySelector('.hero-title .gradient-text');
+    if (!heroTitle) return;
+
+    const text = heroTitle.textContent;
+    heroTitle.textContent = '';
+
+    let i = 0;
+    const timer = setInterval(() => {
+        if (i < text.length) {
+            heroTitle.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(timer);
+        }
+    }, 100);
+}
+
+// Initialize typing effect when hero section is in view
+const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            initTypingEffect();
+            heroObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+const heroSection = document.querySelector('.hero');
+if (heroSection) {
+    heroObserver.observe(heroSection);
+}
+
+// ===== تحميل المشاريع من Dashboard =====
+async function loadPortfolioProjects() {
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (!projectsGrid) return;
+
+    const currentLang = document.body.getAttribute('data-lang') || 'ar';
+    try {
+        // Compat API
+        const snap = await firebase.firestore().collection('projects').orderBy('createdAt','desc').get();
+        const projectsData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+        if (projectsData.length === 0) return;
+
+        projectsGrid.innerHTML = projectsData.map(project => {
+            const projectBg = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            const projectIcon = '<i class="fas fa-code" style="font-size: 3rem; color: white;"></i>';
+
+            let linksHtml = '';
+            if (project.links?.youtube) {
+                linksHtml += `<a href="${project.links.youtube}" class="project-link" target="_blank" style="background: #ff0000; color: white;" title="YouTube Video">
+                    <i class="fab fa-youtube"></i>
+                </a>`;
+            }
+            if (project.links?.github) {
+                linksHtml += `<a href="${project.links.github}" class="project-link" target="_blank" style="background: #333; color: white;" title="GitHub Repository">
+                    <i class="fab fa-github"></i>
+                </a>`;
+            }
+            if (project.links?.live) {
+                linksHtml += `<a href="${project.links.live}" class="project-link" target="_blank" style="background: #007bff; color: white;" title="Live Demo">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>`;
+            }
+
+            return `
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-thumbnail" style="width: 100%; height: 200px; background: ${projectBg}; display: flex; align-items: center; justify-content: center; position: relative;">
+                            ${projectIcon}
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                ${linksHtml}
+                            </div>
+                        </div>
+                        <div class="project-badge">${project.badge || ''}</div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">${project.title?.[currentLang] || ''}</h3>
+                        <p class="project-description">${project.description?.[currentLang] || ''}</p>
+                        <div class="project-tech">
+                            ${(project.techs || []).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        addVideoListeners();
+    } catch (e) {
+        console.error('loadPortfolioProjects error:', e);
+    }
+}
+
+// إضافة event listeners للفيديو
+function addVideoListeners() {
+    const videoLinks = document.querySelectorAll('.video-link');
+    videoLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const videoUrl = this.getAttribute('data-video');
+            const title = this.getAttribute('data-title');
+            openVideoModal(videoUrl, title);
+        });
+    });
+}
+
+// فتح نافذة الفيديو
+function openVideoModal(videoUrl, title) {
+    // إنشاء modal للفيديو
+    const modal = document.createElement('div');
+    modal.className = 'video-modal';
+    modal.innerHTML = `
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3>${title}</h3>
+                <button class="video-modal-close">&times;</button>
+            </div>
+            <div class="video-modal-body">
+                <video controls style="width: 100%; max-width: 800px;">
+                    <source src="${videoUrl}" type="video/mp4">
+                    <source src="${videoUrl}" type="video/webm">
+                    <source src="${videoUrl}" type="video/ogg">
+                    متصفحك لا يدعم تشغيل الفيديو.
+                </video>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // إغلاق modal
+    const closeBtn = modal.querySelector('.video-modal-close');
+    closeBtn.addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
+    
+    // إغلاق عند الضغط خارج الفيديو
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
+}
+
+// تحميل المشاريع عند فتح الصفحة وعند تغيير اللغة
+document.addEventListener('DOMContentLoaded', function() {
+    // تأكد من تحميل الصفحة أولاً
+    setTimeout(loadPortfolioProjects, 100);
+    setTimeout(loadCVLink, 150);
+});
+
+// تحميل المشاريع عند فتح الصفحة
+window.addEventListener('load', function() {
+    setTimeout(loadPortfolioProjects, 200);
+    setTimeout(loadCVLink, 250);
+});
+
+// إعادة تحميل المشاريع عند تغيير اللغة
+const originalSetLanguage = setLanguage;
+setLanguage = function(lang) {
+    originalSetLanguage(lang);
+    setTimeout(loadPortfolioProjects, 100);
+};
+
+async function loadCVLink() {
+    try {
+        const docSnap = await firebase.firestore().collection('settings').doc('public').get();
+        const data = docSnap.exists ? docSnap.data() : {};
+        let cvUrl = data?.cvUrl;
+        const btn = document.getElementById('cvDownloadBtn');
+        if (btn && cvUrl) {
+            // تحويل روابط Google Drive لروابط تنزيل مباشرة عند الإمكان
+            if (cvUrl.includes('drive.google.com')) {
+                // أنماط شائعة: /file/d/{id}/view أو ?id={id}
+                const idFromPath = (cvUrl.match(/\/file\/d\/([^/]+)\//) || [null, null])[1];
+                const idFromQuery = (cvUrl.match(/[?&]id=([^&]+)/) || [null, null])[1];
+                const fileId = idFromPath || idFromQuery;
+                if (fileId) {
+                    cvUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+                }
+            }
+
+            btn.href = cvUrl;
+            btn.setAttribute('rel', 'noopener noreferrer');
+            btn.setAttribute('target', '_blank');
+            btn.setAttribute('download', 'Jomanah_Mostafa_CV.pdf');
+            btn.style.display = 'inline-flex';
+
+            // تأكيد الفتح حتى لو المتصفح يمنع خاصية download عبر كروس أوريجن
+            btn.addEventListener('click', function(e) {
+                if (!cvUrl) {
+                    e.preventDefault();
+                    alert('رابط الـ CV غير متوفر حالياً.');
+                    return;
+                }
+                // افتح في نافذة جديدة لضمان السلوك عبر الأنظمة
+                window.open(cvUrl, '_blank', 'noopener');
+            }, { once: true });
+        }
+    } catch (e) {
+        console.error('loadCVLink error:', e);
+    }
+}
+
+// already imported at top
+
+window.saveMessage = async function(event) {
+  if (event && typeof event.preventDefault === 'function') event.preventDefault();
+  const firstName = document.getElementById('contactFirstName')?.value || '';
+  const lastName = document.getElementById('contactLastName')?.value || '';
+  const email = document.getElementById('contactEmail')?.value || '';
+  const subject = document.getElementById('contactSubject')?.value || '';
+  const message = document.getElementById('contactMessage')?.value || '';
+
+  if (!firstName || !lastName || !subject || !message) {
+    alert('يرجى ملء جميع الحقول!');
+    return;
+  }
+
+  try {
+    await firebase.firestore().collection('messages').add({
+      firstName, lastName, email, subject, message, date: new Date().toISOString()
+    });
+    alert('تم إرسال الرسالة بنجاح!');
+    document.getElementById('contactForm')?.reset();
+  } catch (err) {
+    console.error('saveMessage error:', err);
+    alert('فشل إرسال الرسالة. تحقق من Console و قواعد Firestore.');
+  }
+};
+
+function switchTab(tabName) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+    document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+    document.getElementById(`${tabName}-tab`).classList.add('active');
+
+    if (tabName === 'manage') {
+        loadProjects();
+    }
+    if (tabName === 'messages') {
+        renderDashboardMessages();
+    }
+}
+
+function getMessages() {
+    const stored = localStorage.getItem('portfolio-messages');
+    return stored ? JSON.parse(stored) : [];
+}
+
+function renderDashboardMessages() {
+    const messages = getMessages();
+    const container = document.getElementById('dashboardMessages');
+    if (messages.length === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 3rem; color: #666;">
+                <i class="fas fa-envelope-open-text" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                <p>لا توجد رسائل حالياً.</p>
+            </div>
+        `;
+        return;
+    }
+    container.innerHTML = messages.reverse().map(msg => `
+        <div style="background:#f9fafb;border-radius:12px;box-shadow:0 4px 16px rgba(102,126,234,0.08);padding:1.5rem;margin-bottom:1rem;border:2px solid #e5e7eb;">
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:0.7rem;">
+                <i class="fas fa-user" style="color:#667eea;font-size:1.5rem;"></i>
+                <strong>${msg.firstName} ${msg.lastName}</strong>
+                <span style="color:#999;font-size:0.9rem;margin-right:auto;">${new Date(msg.date).toLocaleString()}</span>
+            </div>
+            <div style="margin-bottom:0.5rem;">
+                <span style="background:#e0e7ff;color:#5b21b6;padding:2px 8px;border-radius:8px;font-weight:600;">
+                    <i class="fas fa-tag"></i> ${msg.subject}
+                </span>
+            </div>
+            <div style="color:#555;font-size:0.95rem;margin-bottom:0.5rem;">
+                <i class="fas fa-comment-dots"></i> ${msg.message}
+            </div>
+        </div>
+    `).join('');
+}
