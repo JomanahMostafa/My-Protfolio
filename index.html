@@ -200,6 +200,12 @@ export default Portfolio;
                         <p data-key="aboutBio2">
                             متخصص في تطوير المواقع والتطبيقات الويب باستخدام React, Next.js, HTML, CSS و JavaScript، مع التركيز على واجهات المستخدم التفاعلية وتجربة المستخدم المتميزة والأداء العالي.
                         </p>
+                        <div style="margin-top: 1rem;">
+                            <a id="cvDownloadBtn" href="#" target="_blank" rel="noopener" class="btn btn-primary" style="display:none;">
+                                <span>Download CV</span>
+                                <i class="fas fa-file-download"></i>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="about-features">
@@ -450,7 +456,7 @@ export default Portfolio;
                             </div>
                             <div class="contact-content">
                                 <h4 data-key="emailTitle">البريد الإلكتروني</h4>
-                                <span>jomanahmosyaf@gmail.com</span>
+                                <span>jomanahmosyafa@gmail.com</span>
                             </div>
                         </div>
 
@@ -554,7 +560,26 @@ export default Portfolio;
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script>
+        // Initialize Firebase directly
+        const firebaseConfig = {
+            apiKey: "AIzaSyApu6eRjaVKFqn8Y4-BmnVe3gmG9gz9qbM",
+            authDomain: "my-protfolio-2913b.firebaseapp.com",
+            projectId: "my-protfolio-2913b",
+            storageBucket: "my-protfolio-2913b.appspot.com",
+            messagingSenderId: "141810677523",
+            appId: "1:141810677523:web:532e7bfb2fb882536b8ce6",
+            measurementId: "G-XT8PFG78SK"
+        };
+        
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+    </script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
